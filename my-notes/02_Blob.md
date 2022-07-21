@@ -10,22 +10,28 @@
   - different `trees` may know that `blob` (those contents) as different files created at different times.
 - `blobs` are named by computing the `SHA1` hash id of its `size` and `contents`.
   - they have no proper "name" nor structure.
-    - simply referenced by the SHA1 that is determined by their specific content.
+    - simply referenced by the hash id that is determined by their specific content.
   - this verifies the `blob`'s contents will never change (they're immutable).
-  - identical content will always be represented by the same `blob` (SHA1).
+  - identical content will always be represented by the same `blob` (hash id).
     - therefore, identical content will **_NOT_** create a new `blob` but instead **_share_** a previously created `blob` within the same repo.
 - Will not disappear from your repo as long as there is at least one file-link remaining to it.
 
 ## Creating a blob
 
 - When you add a file to the `index` a new `blob` is created.
+  - `git add file.txt`
   - by that I mean you add a new file or an updated file to the "staging area".
     - it has not been committed yet. That isn't required to create a `blob`.
   - and remember, it's always a new `blob` being created. They are never mutated.
 
+```sh
+$ git ls-files --stage # list blobs referenced by the index
+100644 ce013625030ba8dba906f756967f9e9ca394464a 0 file.txt
+```
+
 ## Inspect a blob
 
-- You first need to know or find its SHA1 (or at least the first 6 characters)
+- You first need to know or find its hash id (or at least the first 6 characters)
 - `git cat-file (-t | -p) <object>` provides `content` or `type` and `size` information for repository `objects`
   - `blobs`, `trees`, and `commits` are called `objects` in git
   - they reside in `.git`'s `objects` directory
