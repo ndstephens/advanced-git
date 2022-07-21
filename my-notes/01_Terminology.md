@@ -52,6 +52,9 @@
 
 - Any directory on your filesystem which has a `repository` associated with it (typically indicated by the presence of a sub-directory within it named `.git`).
 - It includes all the files and sub-directories in that directory.
+- Git maintains **_snapshots_** (aka `commit`s) of a directory's contents.
+  - that directory is your `working tree` (aka your project).
+  - this concept is the basic task of git.
 
 ## Commit
 
