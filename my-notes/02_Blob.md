@@ -21,13 +21,15 @@
 - When you add a file to the `index` a new `blob` is created.
   - `git add file.txt`
   - by that I mean you add a new file or an updated file to the "staging area".
-    - it has not been committed yet. That isn't required to create a `blob`.
-  - and remember, it's always a new `blob` being created. They are never mutated.
+    - it has not been committed yet
+  - Remember: it's always a new `blob` being created. They are never mutated.
 
 ```sh
 $ git ls-files --stage # list blobs referenced by the index
 100644 ce013625030ba8dba906f756967f9e9ca394464a 0 file.txt
 ```
+
+> The `index` object exists at `.git/index`. It is not a directory.
 
 ## Inspect a blob
 
