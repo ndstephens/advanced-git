@@ -1,13 +1,23 @@
 # Trees
 
+- A `tree` contains pointers to `blobs` and other `trees`.
+  - `blobs` relate to files
+  - `trees` relate to directories
+- A `tree` will have a SHA-1 `hash id` created by its contents and metadata:
+  - the object's type: "`tree`"
+  - the object's `size`
+  - a `\0` delimiter
+  - the `content` (its pointers to `blobs` and other `trees`)
+    - each pointer lists:
+      - its `type` (`blob` or `tree`)
+      - the `hash-id` of that `blob` or `tree`
+      - the filename or directory name associated with that `blob` or `tree` (remember that multiple files can point to the same `blob`)
+      - the file or directory's mode (executable, symbolic link, ...)
+- When you inspect a `tree`'s contents you see which `blobs` and `trees` it points to.
+- The `tree` and its `hash id` are forever linked, and the `tree` is immutable.
+- Two `tree`'s with identical contents would have the same `hash id` (just like with `blob`s).
 - Every `commit` holds a **_single_** `tree`.
-- A `tree` will contain `blob`'s and can also contain other sub-`tree`s
-- The `tree` represents the directory and file structure of your `working-tree` (project).
-- You can’t discover which `tree`(s) a `blob` lives in just by looking at the `blob`, since it may have many, many owners.
-  - However when you inspect a `tree`'s contents you see which `blob`s are attached to it.
-- A `tree` will have a SHA1 hash id created by its contents (just like a `blob`).
-  - The `tree` and its hash id are forever linked, and the `tree` is immutable.
-  - Two `tree`'s with identical contents would have the same hash id (just like `blob`s).
+  - but again...that `tree` can point to other `trees` (similar to sub-directories)
 
 ## Creating a tree
 

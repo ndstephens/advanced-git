@@ -1,20 +1,27 @@
 # # Blobs
 
-- Git represents your file's `contents` with `blobs`.
-  - `blobs` are content, not files.
+- Git represents a file's `content` with `blobs`.
+  - `blobs` are the content, not your actual files themselves.
   - `blobs` do not change (immutable), unlike `files` (mutable).
-  - they store no `metadata` about the content.
-  - `metadata` is kept in the `tree` that holds the `blob`.
-- `blobs` are "leaf nodes" in `trees` (similar to directories).
-  - multiple `trees` can reference the same `blob`.
-  - different `trees` may know that `blob` (those contents) as different files created at different times.
-- `blobs` are named by computing the `SHA1` hash id of its `size` and `contents`.
-  - they have no proper "name" nor structure.
-    - simply referenced by the hash id that is determined by their specific content.
+- A `blob` will not disappear from your repo as long as there is at least one file-link remaining to it.
+- `blobs` are identified (and referenced) by the computed SHA1 `hash id` of its `contents`.
+  - to be precise, it's the hash of some `metadata` and the `content`:
+    - the object's type: "`blob`"
+    - the object's `size`
+    - a `\0` delimiter
+    - the `content` (usually the code or text of a file)
   - this verifies the `blob`'s contents will never change (they're immutable).
-  - identical content will always be represented by the same `blob` (hash id).
-    - therefore, identical content will **_NOT_** create a new `blob` but instead **_share_** a previously created `blob` within the same repo.
-- Will not disappear from your repo as long as there is at least one file-link remaining to it.
+  - if a file's `contents` change then a new `blob` is created.
+  - identical `content` will always be represented by the same `blob`.
+    - within the same repo, files that have the same content share the same `blob`.
+- `blobs` are "leaf nodes" (similar to files) in `trees` (which are similar to directories).
+  - multiple `trees` can reference the same `blob`.
+  - different `trees` may know that `blob` as different filenames created at different times.
+- `blobs` do **_NOT_** contain or reference certain information that is critical for a project, such as:
+  - filenames
+  - directory structures
+- That information is stored in `trees`
+  - `trees` know which `blobs` relate to which filenames and the directory they are stored in.
 
 ## Creating a blob
 
