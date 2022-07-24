@@ -21,7 +21,7 @@
 │   └── refs
 │       └── heads
 │           └── main
-├── objects
+├── objects  <-- where all git objects live (blobs, trees, commits)
 │   ├── 4c
 │   │   └── f9f177c4c015836fca6a31f9c3917e89ae29ec <-- tree
 │   ├── c9
@@ -31,7 +31,7 @@
 │   ├── info
 │   └── pack
 └── refs
-    ├── heads
+    ├── heads  <-- contain which commit each branch points to
     │   └── main
     └── tags
 ```
@@ -85,7 +85,8 @@
 
 ## HEAD
 
+- Only one HEAD exits
 - Used by your repository to define what is currently checked out:
-- If you `checkout` a `branch`, `HEAD` symbolically refers to that `branch`, indicating that the `branch` name should be updated after the next `commit` operation.
-- If you `checkout` a specific `commit`, `HEAD` refers to that `commit` only. This is referred to as a `detached HEAD`, and occurs, for example, if you check out a `tag` name.
-  - If `HEAD` doesn't refer to a `branch` then it's a `detached HEAD`.
+  - If you `checkout` a `branch`, `HEAD` symbolically refers to that `branch`, indicating that the `branch` name should be updated after the next `commit` operation.
+  - If you `checkout` a specific `commit`, `HEAD` refers to that `commit` only. This is referred to as a `detached HEAD`, and occurs, for example, if you check out a `tag` name.
+- If `HEAD` doesn't refer to a `branch` then it's a `detached HEAD`.
